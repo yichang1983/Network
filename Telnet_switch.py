@@ -20,21 +20,11 @@ if password:
 
 #use tn.write(b "command"  \n") to do the configuration.
 tn.write(b"config t\n")
-tn.write(b"vlan 2\n")
-tn.write(b"name Python_vlan 2\n")
-tn.write(b"exit\n")
-tn.write(b"vlan 3\n")
-tn.write(b"name Python_vlan 3\n")
-tn.write(b"exit\n")
-tn.write(b"vlan 4\n")
-tn.write(b"name Python_vlan 4\n")
-tn.write(b"exit\n")
-tn.write(b"vlan 5\n")
-tn.write(b"name Python_vlan 5\n")
-tn.write(b"exit\n")
-tn.write(b"vlan 6\n")
-tn.write(b"name Python_vlan 6\n")
-tn.write(b"exit\n")
+
+for n in range(2,11):
+    tn.write(b"vlan " + str(n).encode('ascii') + b"\n")             #tn.write(b"vlan " + str(n).encode('ascii') + b"\n") not working because "The (b"... means that you want to work with bytes. You need to convert the str(n) to bytes too. Try - tn.write(b"vlan " + str(n).encode('ascii') + b"\n") instead. That will convert each string into byte and then concat them. "
+    tn.write(b"name Python_vlan " + str(n).encode('ascii') + b"\n")
+
 tn.write(b"end\n")
 tn.write(b"exit\n")
 
