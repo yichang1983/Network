@@ -24,7 +24,7 @@ iosv_l2_s3 = {
     'password': 'install',
 }
 
-#Open a file which has configuration(vlan 2, access and trunk ports etc)
+
 with open('iosv_l2_config1') as f:
     lines = f.read().splitlines()
 print(lines)
