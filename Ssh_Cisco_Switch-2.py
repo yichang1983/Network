@@ -24,14 +24,15 @@ iosv_l2_s3 = {
     'password': 'install',
 }
 
+#Open a file which has configuration(vlan 2, access and trunk ports etc)
+with open('iosv_l2_config1') as f:
+    lines = f.read().splitlines()
+print(lines)
 
-all_devices = [iosv_l2_s1, iosv_l2_s2, iosv_l2_s3]
+#Star configuring the s3 device followed by s2 then s1
+all_devices = [iosv_l2_s3, iosv_l2_s2, iosv_l2_s1]
 
-#configure Vlan
 for devices in all_devices:
     net_connect = ConnectHandler(**devices)
-    for n in range (2,5):
-       print("Creating VLAN " + str(n))
-       config_commands = ['vlan ' + str(n), 'name Python_VLAN ' + str(n)]
-       output = net_connect.send_config_set(config_commands)
-       print(output)
+    output = net_connect.send_config_set(lines)
+    print(output)
